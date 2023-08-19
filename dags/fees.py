@@ -138,6 +138,11 @@ def _load_new_data_transport(ti):
 
     # Recover the data
     cursor_bronze.execute(sql_bronze)
+    # TODO: Cosas a modificar y arreglar
+    # Download the data more quickly.
+    # cursor_bronze.fetchall()
+    # cursor_bronze.fetchmany(2)
+    # cursor_bronze.fetchone()
 
     # Move the data from the bronze to the silver table
     sql_silver = "INSERT INTO transport_cost_silver (country, transport_cost, created_at, updated_at) " \
@@ -145,6 +150,10 @@ def _load_new_data_transport(ti):
     for fila in cursor_bronze:
         cursor_silver.execute(sql_silver, fila)
         connexion.commit()
+        # TODO: Cosas a modificar y arreglar
+        # Close communication with the database
+        # cursor_silver.close()
+        # connexion.close()
 
 
 def _load_updated_data_grading(ti):
